@@ -62,8 +62,8 @@ int main()
         printf("Digite um comando (G: Green, B: Blue, R: Red, W: White, Z: Buzzer, O: Off): ");
         tecla = getchar(); //Aguarda comando do terminal
 
-        if(tecla=='Z'){          //Caso a tecla enviada for Z
-            tocar_buzzer();     //Chamar funcao para ativar o Buzzer
+        if(tecla=='Z' || tecla=='z'){          //Caso a tecla enviada for Z
+            tocar_buzzer();                   //Chamar funcao para ativar o Buzzer
         }else if(tecla=='T'){
             bootsel();
         }else{
