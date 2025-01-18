@@ -21,13 +21,23 @@ void inicializa_pinos(){
 }
 
 //funcao para controlar os leds
-void piscar_leds(char tecla){
-    switch(tecla){  //estrutura switch para verificar qual tecla foi pressionada e qual ação tomar
-        case 'G':   //tecla G -> led green
-
-        break;
-        default: 
-        
+void piscar_leds(char tecla) {
+    desligar_leds(); // Garante que apenas um LED estará ligado
+    switch(tecla) {
+        case 'G':   // LED Verde
+            
+            break;
+        case 'B':   // LED Azul
+            
+            break;
+        case 'R':   // LED Vermelho
+            
+            break;
+        case 'W':   // Todos os LEDs
+            
+            break;
+        default:
+            printf("Comando inválido para LEDs\n");
     }
 }
 
@@ -61,13 +71,21 @@ int main()
         //Recebe comandos via UART
         printf("Digite um comando (G: Green, B: Blue, R: Red, W: White, T: Buzzer, O: Off): ");
         tecla = getchar(); //Aguarda comando do terminal
-
-        if(tecla=='B'){          //Caso a tecla enviada for B  
-            tocar_buzzer();     //Chamar funcao para ativar o Buzzer
-        }else if(tecla=='T'){
-            bootsel();
-        }else{
-            piscar_leds(tecla);
+        switch(tecla) {
+            case 'G':
+            case 'B':
+            case 'R':
+            case 'W':
+                piscar_leds(tecla); // Controla os LEDs
+                break;
+            case 'T':
+                tocar_buzzer();     // Ativa o buzzer
+                break;
+            case 'O':
+                desligar_leds();    // Desliga todos os LEDs
+                break;
+            default:
+                printf("Comando inválido\n");
         }
         sleep_ms(100);         //Pequeno atraso para estabilidade
     }
