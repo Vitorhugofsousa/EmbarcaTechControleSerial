@@ -20,8 +20,15 @@ void inicializa_pinos(){
     gpio_set_dir(gpio_buzzer, GPIO_OUT);
 }
 
-void piscar_leds(int gpio_led){
-    // Liga o led
+//funcao para controlar os leds
+void piscar_leds(char tecla){
+    switch(tecla){  //estrutura switch para verificar qual tecla foi pressionada e qual ação tomar
+        case 'G':   //tecla G -> led green
+
+        break;
+        default: 
+        
+    }
 }
 
 void tocar_buzzer(){
@@ -45,8 +52,20 @@ int main()
     stdio_init_all();
     inicializa_pinos();
 
+    char tecla;
+
     while(1){
-        //Aguardando Código
-        sleep_ms(1000);
+        //Recebe comandos via UART
+        printf("Digite um comando (G: Green, B: Blue, R: Red, W: White, T: Buzzer, O: Off): ");
+        tecla = getchar(); //Aguarda comando do terminal
+
+        if(tecla=='B'){       
+            tocar_buzzer();
+        }else if(tecla=='T'){
+            bootsel();
+        }else{
+            piscar_leds(tecla);
+        }
+        sleep_ms(100);
     }
 }
