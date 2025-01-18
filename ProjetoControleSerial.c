@@ -31,8 +31,11 @@ void piscar_leds(char tecla){
     }
 }
 
+//Funcao para ativar o Buzzer por 2 segundos
 void tocar_buzzer(){
-    // Liga o buzzer
+    gpio_put(gpio_buzzer, true);      //Ligar o buzzer
+    sleep_ms(2000);                  //Buuzer ativo por 2 segundos
+    gpio_put(gpio_buzzer, false);   //Desativar buzzer
 }
 
 void desligar_leds(){
@@ -59,13 +62,13 @@ int main()
         printf("Digite um comando (G: Green, B: Blue, R: Red, W: White, T: Buzzer, O: Off): ");
         tecla = getchar(); //Aguarda comando do terminal
 
-        if(tecla=='B'){       
-            tocar_buzzer();
+        if(tecla=='B'){          //Caso a tecla enviada for B  
+            tocar_buzzer();     //Chamar funcao para ativar o Buzzer
         }else if(tecla=='T'){
             bootsel();
         }else{
             piscar_leds(tecla);
         }
-        sleep_ms(100);
+        sleep_ms(100);         //Pequeno atraso para estabilidade
     }
 }
