@@ -71,6 +71,7 @@ int main()
         //Recebe comandos via UART
         printf("Digite um comando (G: Green, B: Blue, R: Red, W: White, T: Buzzer, O: Off): ");
         tecla = getchar(); //Aguarda comando do terminal
+        
         switch(tecla) {
             case 'G':
             case 'B':
