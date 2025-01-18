@@ -59,11 +59,11 @@ int main()
 
     while(1){
         //Recebe comandos via UART
-        printf("Digite um comando (G: Green, B: Blue, R: Red, W: White, T: Buzzer, O: Off): ");
+        printf("Digite um comando (G: Green, B: Blue, R: Red, W: White, Z: Buzzer, O: Off): ");
         tecla = getchar(); //Aguarda comando do terminal
 
-        if(tecla=='B'){          //Caso a tecla enviada for B  
-            tocar_buzzer();     //Chamar funcao para ativar o Buzzer
+        if(tecla=='Z' || tecla=='z'){          //Caso a tecla enviada for Z
+            tocar_buzzer();                   //Chamar funcao para ativar o Buzzer
         }else if(tecla=='T'){
             bootsel();
         }else{
