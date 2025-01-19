@@ -28,7 +28,7 @@ void piscar_leds(char tecla)
     switch (tecla)
     {
     case 1: // LED Verde
-
+    
         break;
     case 2: // LED Azul
 
@@ -103,12 +103,15 @@ int main()
         case 3:                   // RED
         case 4:                   // WHITE
             piscar_leds(comando); // Controla os LEDs
+            printf("ON: %s\n", entrada);
             break;
         case 5:             // BUZZER
             tocar_buzzer(); // Ativa o buzzer
+            printf("ON: %s\n", entrada);
             break;
         case 6:              // OFF
             desligar_leds(); // Desliga todos os LEDs
+            printf("LEDS: %s\n", entrada);
             break;
         default:
             printf("Comando inválido\n");
