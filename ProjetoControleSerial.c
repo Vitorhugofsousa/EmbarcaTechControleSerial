@@ -37,7 +37,9 @@ void piscar_leds(char tecla)
 
         break;
     case 4: // Todos os LEDs
-
+        gpio_put(gpio_led_red, true);
+        gpio_put(gpio_led_green, true);
+        gpio_put(gpio_led_blue, true);
         break;
     default:
         printf("Comando inválido para LEDs\n");
