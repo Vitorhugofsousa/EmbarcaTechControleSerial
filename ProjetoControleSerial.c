@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "pico/stdlib.h"
-#include "hardware/pwm.h"
 #include "pico/bootrom.h"
+#include "hardware/pwm.h"
 
 #define gpio_buzzer 21
 #define gpio_led_green 11
@@ -132,24 +132,28 @@ int main()
 
         switch (comando)
         {
-        case 1:                   // GREEN
-        case 2:                   // BLUE
-        case 3:                   // RED
+        case 1:                             // GREEN
             piscar_leds(comando);
             printf("ON: %s\n", entrada);
-        case 4:                   // WHITE
-            piscar_leds(comando); // Controla os LEDs
+        case 2:                             // BLUE
+            piscar_leds(comando);
+            printf("ON: %s\n", entrada);
+        case 3:                             // RED
+            piscar_leds(comando);
+            printf("ON: %s\n", entrada);
+        case 4:                             // WHITE
+            piscar_leds(comando);           // Controla os LEDs
             printf("ON: %s\n", entrada);
             break;
-        case 5:             // BUZZER
-            tocar_buzzer(); // Ativa o buzzer
+        case 5:                             // BUZZER
+            tocar_buzzer();                 // Ativa o buzzer
             printf("ON: %s\n", entrada);
             break;
-        case 6:              // OFF
-            desligar_leds(); // Desliga todos os LEDs
+        case 6:                             // OFF
+            desligar_leds();                // Desliga todos os LEDs
             printf("LEDS: %s\n", entrada);
             break;
-        case 7: // BOOTSEL
+        case 7:                             // BOOTSEL
             bootsel();
             break;
         default:
