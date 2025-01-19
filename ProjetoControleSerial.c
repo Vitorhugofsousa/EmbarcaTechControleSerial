@@ -2,6 +2,7 @@
 #include <string.h>
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
+#include "pico/bootrom.h"
 
 #define gpio_buzzer 21
 #define gpio_led_green 11
@@ -101,6 +102,8 @@ int mapear_comando(const char *comando)
         return 5;
     if (strcmp(comando, "OFF") == 0)
         return 6;
+    if (strcmp(comando, "BOOTSEL") == 0)
+        return 7;
     return 0; // Comando inválido
 }
 
@@ -145,6 +148,9 @@ int main()
         case 6:              // OFF
             desligar_leds(); // Desliga todos os LEDs
             printf("LEDS: %s\n", entrada);
+            break;
+        case 7: // BOOTSEL
+            bootsel();
             break;
         default:
             printf("Comando inválido\n");
