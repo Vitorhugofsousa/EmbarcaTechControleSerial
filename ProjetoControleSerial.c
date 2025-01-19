@@ -48,7 +48,9 @@ void piscar_leds(char tecla)
 
         break;
     case 3: // LED Vermelho
-
+        printf("Ligado LED vermelho...\n");
+        gpio_put(gpio_led_red, true);
+        printf("LED vermelho ligado\n");
         break;
     case 4: // Todos os LEDs
         gpio_put(gpio_led_red, true);
@@ -119,6 +121,8 @@ int main()
         case 1:                   // GREEN
         case 2:                   // BLUE
         case 3:                   // RED
+            piscar_leds(comando);
+            printf("ON: %s\n", entrada);
         case 4:                   // WHITE
             piscar_leds(comando); // Controla os LEDs
             printf("ON: %s\n", entrada);
