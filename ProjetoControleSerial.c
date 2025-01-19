@@ -1,7 +1,7 @@
 #include <stdio.h>
+#include <string.h>
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
-
 
 #define gpio_buzzer 21
 #define gpio_led_green 11
@@ -23,9 +23,14 @@ void inicializa_pinos()
     gpio_set_dir(gpio_buzzer, GPIO_OUT);
 }
 
+//Função para desligar todos os LEDS
 void desligar_leds()
 {
-    // Desliga os leds
+    printf("Apagando todos os leds...\n");
+    gpio_put(gpio_led_blue, 0);
+    gpio_put(gpio_led_green, 0);
+    gpio_put(gpio_led_red, 0);
+    printf("Todos LEDS foram apagados\n");
 }
 
 // funcao para controlar os leds
