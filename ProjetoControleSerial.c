@@ -26,11 +26,11 @@ void inicializa_pinos()
 //Função para desligar todos os LEDS
 void desligar_leds()
 {
-    printf("Apagando todos os leds...\n");
+    printf("Apagando todos os LEDs...\n");
     gpio_put(gpio_led_blue, 0);
     gpio_put(gpio_led_green, 0);
     gpio_put(gpio_led_red, 0);
-    printf("Todos LEDS foram apagados\n");
+    printf("Todos LEDs foram apagados\n");
 }
 
 // funcao para controlar os leds
@@ -40,7 +40,9 @@ void piscar_leds(char tecla)
     switch (tecla)
     {
     case 1: // LED Verde
+        printf("Ligado LED verde...\n");
         gpio_put(gpio_led_green, true);
+        printf("LED verde ligado\n");
         break;
     case 2: // LED Azul
 
