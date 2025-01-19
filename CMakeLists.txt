@@ -77,6 +77,7 @@ target_link_libraries(ProjetoControleSerial
         pico_stdlib
         hardware_pwm)
 
+target_link_libraries(ProjetoControleSerial pico_stdlib hardware_pwm)
 # Add the standard include files to the build
 target_include_directories(ProjetoControleSerial PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}
