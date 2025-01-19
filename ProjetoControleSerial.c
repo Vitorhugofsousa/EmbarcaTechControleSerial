@@ -8,7 +8,8 @@
 #define gpio_led_blue 12
 #define gpio_led_red 13
 
-void inicializa_pinos(){
+void inicializa_pinos()
+{
     gpio_init(gpio_led_green);
     gpio_set_dir(gpio_led_green, GPIO_OUT);
 
@@ -22,14 +23,28 @@ void inicializa_pinos(){
     gpio_set_dir(gpio_buzzer, GPIO_OUT);
 }
 
-//funcao para controlar os leds
-void piscar_leds(char tecla){
-    switch(tecla){  //estrutura switch para verificar qual tecla foi pressionada e qual ação tomar
-        case 'G':   //tecla G -> led green
+// funcao para controlar os leds
+void piscar_leds(char tecla)
+{
+    desligar_leds(); // Garante que apenas um LED estará ligado
+    switch (tecla)
+    {
+    case 1: // LED Verde
+    
+        break;
+    case 2: // LED Azul
 
         break;
-        default: 
-        
+    case 3: // LED Vermelho
+
+        break;
+    case 4: // Todos os LEDs
+        gpio_put(gpio_led_red, true);
+        gpio_put(gpio_led_green, true);
+        gpio_put(gpio_led_blue, true);
+        break;
+    default:
+        printf("Comando inválido para LEDs\n");
     }
 }
 
@@ -48,15 +63,31 @@ void tocar_buzzer(){
     pwm_set_enabled(numero_slice, false);                      //Desativar o PWM  
 }
 
-void desligar_leds(){
+void desligar_leds()
+{
     // Desliga os leds
 }
 
-void leitura_serial(){
-    // Lê a serial
+// Função auxiliar para mapear strings em valores inteiros
+int mapear_comando(const char *comando)
+{
+    if (strcmp(comando, "GREEN") == 0)
+        return 1;
+    if (strcmp(comando, "BLUE") == 0)
+        return 2;
+    if (strcmp(comando, "RED") == 0)
+        return 3;
+    if (strcmp(comando, "WHITE") == 0)
+        return 4;
+    if (strcmp(comando, "BUZZER") == 0)
+        return 5;
+    if (strcmp(comando, "OFF") == 0)
+        return 6;
+    return 0; // Comando inválido
 }
 
-void bootsel(){
+void bootsel()
+{
     // Verifica se o botão de seleção foi pressionado
 }
 
@@ -65,20 +96,37 @@ int main()
     stdio_init_all();
     inicializa_pinos();
 
-    char tecla;
+    char entrada[20];
 
-    while(1){
-        //Recebe comandos via UART
-        printf("Digite um comando (G: Green, B: Blue, R: Red, W: White, Z: Buzzer, O: Off): ");
-        tecla = getchar(); //Aguarda comando do terminal
+    printf("Digite um comando (GREEN, BLUE, RED, WHITE, BUZZER, OFF): \n");
 
-        if(tecla=='Z' || tecla=='z'){          //Caso a tecla enviada for Z
-            tocar_buzzer();                   //Chamar funcao para ativar o Buzzer
-        }else if(tecla=='T'){
-            bootsel();
-        }else{
-            piscar_leds(tecla);
+    while (1)
+    {
+        // Recebe comandos via UART
+        scanf("%19s", entrada); // Lê o comando enviado pelo monitor serial
+
+        int comando = mapear_comando(entrada); // Converte o comando para um valor numérico
+
+        switch (comando)
+        {
+        case 1:                   // GREEN
+        case 2:                   // BLUE
+        case 3:                   // RED
+        case 4:                   // WHITE
+            piscar_leds(comando); // Controla os LEDs
+            printf("ON: %s\n", entrada);
+            break;
+        case 5:             // BUZZER
+            tocar_buzzer(); // Ativa o buzzer
+            printf("ON: %s\n", entrada);
+            break;
+        case 6:              // OFF
+            desligar_leds(); // Desliga todos os LEDs
+            printf("LEDS: %s\n", entrada);
+            break;
+        default:
+            printf("Comando inválido\n");
         }
-        sleep_ms(100);         //Pequeno atraso para estabilidade
+        sleep_ms(100); // Pequeno atraso para estabilidade
     }
 }
