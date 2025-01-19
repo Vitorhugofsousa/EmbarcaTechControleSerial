@@ -8,6 +8,7 @@
 #define gpio_led_blue 12
 #define gpio_led_red 13
 
+//Função para inicializar os pinos de controle dos LEDs e do Buzzer
 void inicializa_pinos()
 {
     gpio_init(gpio_led_green);
@@ -33,7 +34,7 @@ void desligar_leds()
     printf("Todos LEDs foram apagados\n");
 }
 
-// funcao para controlar os leds
+// Função para controlar os leds
 void piscar_leds(char tecla)
 {
     desligar_leds(); // Garante que apenas um LED estará ligado
@@ -41,17 +42,23 @@ void piscar_leds(char tecla)
     {
     case 1: // LED Verde
         printf("Ligado LED verde...\n");
+        gpio_put(gpio_led_red, false);
         gpio_put(gpio_led_green, true);
+        gpio_put(gpio_led_blue, false);
         printf("LED verde ligado\n");
         break;
     case 2: // LED Azul
         printf("Ligado LED azul...\n");
+        gpio_put(gpio_led_red, false);
+        gpio_put(gpio_led_green, false);
         gpio_put(gpio_led_blue, true);
         printf("LED azul ligado\n");
         break;
     case 3: // LED Vermelho
         printf("Ligado LED vermelho...\n");
         gpio_put(gpio_led_red, true);
+        gpio_put(gpio_led_green, false);
+        gpio_put(gpio_led_blue, false);
         printf("LED vermelho ligado\n");
         break;
     case 4: // Todos os LEDs
