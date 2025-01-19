@@ -104,9 +104,11 @@ int mapear_comando(const char *comando)
     return 0; // Comando inválido
 }
 
+// Função para entrar no modo BOOTSEL
 void bootsel()
 {
-    // Verifica se o botão de seleção foi pressionado
+    printf("Entrando no modo BOOTSEL...\n");
+    reset_usb_boot(0, 0); // Reinicia no modo BOOTSEL
 }
 
 int main()
