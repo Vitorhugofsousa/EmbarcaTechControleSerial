@@ -23,6 +23,11 @@ void inicializa_pinos()
     gpio_set_dir(gpio_buzzer, GPIO_OUT);
 }
 
+void desligar_leds()
+{
+    // Desliga os leds
+}
+
 // funcao para controlar os leds
 void piscar_leds(char tecla)
 {
@@ -30,7 +35,7 @@ void piscar_leds(char tecla)
     switch (tecla)
     {
     case 1: // LED Verde
-    
+        gpio_put(gpio_led_green, true);
         break;
     case 2: // LED Azul
 
@@ -61,11 +66,6 @@ void tocar_buzzer(){
     sleep_ms(2000);                                            //Manter o som por 2 segundos
 
     pwm_set_enabled(numero_slice, false);                      //Desativar o PWM  
-}
-
-void desligar_leds()
-{
-    // Desliga os leds
 }
 
 // Função auxiliar para mapear strings em valores inteiros
