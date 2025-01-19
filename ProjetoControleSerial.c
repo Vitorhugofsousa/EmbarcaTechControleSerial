@@ -24,17 +24,18 @@ void inicializa_pinos(){
 void piscar_leds(char tecla) {
     desligar_leds(); // Garante que apenas um LED estará ligado
     switch(tecla) {
-        case 'G':   // LED Verde
+        case 1:   // LED Verde
+        
             
             break;
-        case 'B':   // LED Azul
+        case 2:   // LED Azul
             
             break;
-        case 'R':   // LED Vermelho
+        case 3:   // LED Vermelho
             
             break;
-        case 'W':   // Todos os LEDs
-            
+        case 4:   // Todos os LEDs
+        
             break;
         default:
             printf("Comando inválido para LEDs\n");
@@ -52,8 +53,15 @@ void desligar_leds(){
     // Desliga os leds
 }
 
-void leitura_serial(){
-    // Lê a serial
+// Função auxiliar para mapear strings em valores inteiros
+int mapear_comando(const char *comando) {
+    if (strcmp(comando, "GREEN") == 0) return 1;
+    if (strcmp(comando, "BLUE") == 0) return 2;
+    if (strcmp(comando, "RED") == 0) return 3;
+    if (strcmp(comando, "WHITE") == 0) return 4;
+    if (strcmp(comando, "BUZZER") == 0) return 5;
+    if (strcmp(comando, "OFF") == 0) return 6;
+    return 0; // Comando inválido
 }
 
 void bootsel(){
@@ -65,24 +73,27 @@ int main()
     stdio_init_all();
     inicializa_pinos();
 
-    char tecla;
+    char entrada[20];
+
+    printf("Digite um comando (GREEN, BLUE, RED, WHITE, BUZZER, OFF): \n");
 
     while(1){
         //Recebe comandos via UART
-        printf("Digite um comando (G: Green, B: Blue, R: Red, W: White, T: Buzzer, O: Off): ");
-        tecla = getchar(); //Aguarda comando do terminal
-        
-        switch(tecla) {
-            case 'G':
-            case 'B':
-            case 'R':
-            case 'W':
-                piscar_leds(tecla); // Controla os LEDs
+        scanf("%19s", entrada); // Lê o comando enviado pelo monitor serial
+
+        int comando = mapear_comando(entrada); // Converte o comando para um valor numérico
+
+        switch(comando) {
+            case 1: //GREEN
+            case 2: //BLUE
+            case 3: //RED
+            case 4: // WHITE
+                piscar_leds(comando); // Controla os LEDs
                 break;
-            case 'T':
+            case 5: // BUZZER
                 tocar_buzzer();     // Ativa o buzzer
                 break;
-            case 'O':
+            case 6: // OFF
                 desligar_leds();    // Desliga todos os LEDs
                 break;
             default:
