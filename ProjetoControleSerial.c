@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "pico/stdlib.h"
+#include "hardware/pwm.h"
 
 #define gpio_buzzer 21
 #define gpio_led_green 11
@@ -39,7 +40,7 @@ void piscar_leds(char tecla)
     switch (tecla)
     {
     case 1: // LED Verde
-    
+        gpio_put(gpio_led_green, true);
         break;
     case 2: // LED Azul
 
@@ -48,21 +49,29 @@ void piscar_leds(char tecla)
 
         break;
     case 4: // Todos os LEDs
-
+        gpio_put(gpio_led_red, true);
+        gpio_put(gpio_led_green, true);
+        gpio_put(gpio_led_blue, true);
         break;
     default:
         printf("Comando inválido para LEDs\n");
     }
 }
 
-// Funcao para ativar o Buzzer por 2 segundos
-void tocar_buzzer()
-{
-    gpio_put(gpio_buzzer, true);  // Ligar o buzzer
-    sleep_ms(2000);               // Buuzer ativo por 2 segundos
-    gpio_put(gpio_buzzer, false); // Desativar buzzer
-}
+//Funcao para ativar o Buzzer por 2 segundos
+void tocar_buzzer(){
+    gpio_set_function(gpio_buzzer, GPIO_FUNC_PWM);             //Configura pino como saída PWM
+    uint numero_slice = pwm_gpio_to_slice_num(gpio_buzzer);    //Obter o slice do PWM
 
+    pwm_set_clkdiv(numero_slice, 125.0);                       //Ajusta a frequencia da onda PWM
+    pwm_set_wrap(numero_slice, 255);                           //Define o valor máximo para o contador
+    pwm_set_gpio_level(gpio_buzzer, 150);                      //Define a intensidade do som
+    pwm_set_enabled(numero_slice, true);                       //Ativar o PWM
+
+    sleep_ms(2000);                                            //Manter o som por 2 segundos
+
+    pwm_set_enabled(numero_slice, false);                      //Desativar o PWM  
+}
 
 // Função auxiliar para mapear strings em valores inteiros
 int mapear_comando(const char *comando)
