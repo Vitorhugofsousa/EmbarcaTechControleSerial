@@ -134,6 +134,7 @@ int main()
             break;
         case 7:                             // BOOTSEL
             bootsel();
+            printf("ON: %s\n", entrada);
             break;
         default:
             printf("Comando inválido\n");
