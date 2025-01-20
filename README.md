@@ -31,4 +31,4 @@ Ligar os 3 LEDs - Vitor<br>
 Desligar Todos os LEDs - Abel<br> 
 Acionar Buzzer por 2 Segundos - Leonam<br>
 Modo Bootsel - Antônio Louro<br>
-Comunicação Serial - Duda<br>
+Comunicação Serial - Maria Eduarda Ramalho<br>
