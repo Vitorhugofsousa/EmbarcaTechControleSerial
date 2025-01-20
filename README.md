@@ -19,7 +19,11 @@ BOOTSEL: Coloca o microcontrolador em modo Bootsel
 
 No link a seguir há um vídeo contendo a explicação das funções no código escrito na linguagem C:<br><br>
 
-https://youtu.be/2s7boEDFIWI
+https://youtu.be/ThnQFzLejZ0<br>
+
+E no link a seguir há um vídeo com o programa rodando em uma BitDogLab:<br><br>
+
+https://youtube.com/shorts/Q3kmP7ojQxs
 
 # Contribuições
 
