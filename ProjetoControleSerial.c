@@ -28,11 +28,9 @@ void inicializa_pinos()
 //Função para desligar todos os LEDS
 void desligar_leds()
 {
-    printf("Apagando todos os LEDs...\n");
     gpio_put(gpio_led_blue, 0);
     gpio_put(gpio_led_green, 0);
     gpio_put(gpio_led_red, 0);
-    printf("Todos LEDs foram apagados\n");
 }
 
 // Função para controlar os leds
@@ -42,25 +40,13 @@ void piscar_leds(char tecla)
     switch (tecla)
     {
     case 1: // LED Verde
-        printf("Ligado LED verde...\n");
-        gpio_put(gpio_led_red, false);
         gpio_put(gpio_led_green, true);
-        gpio_put(gpio_led_blue, false);
-        printf("LED verde ligado\n");
         break;
     case 2: // LED Azul
-        printf("Ligado LED azul...\n");
-        gpio_put(gpio_led_red, false);
-        gpio_put(gpio_led_green, false);
         gpio_put(gpio_led_blue, true);
-        printf("LED azul ligado\n");
         break;
     case 3: // LED Vermelho
-        printf("Ligado LED vermelho...\n");
         gpio_put(gpio_led_red, true);
-        gpio_put(gpio_led_green, false);
-        gpio_put(gpio_led_blue, false);
-        printf("LED vermelho ligado\n");
         break;
     case 4: // Todos os LEDs
         gpio_put(gpio_led_red, true);
@@ -110,7 +96,6 @@ int mapear_comando(const char *comando)
 // Função para entrar no modo BOOTSEL
 void bootsel()
 {
-    printf("Entrando no modo BOOTSEL...\n");
     reset_usb_boot(0, 0); // Reinicia no modo BOOTSEL
 }
 
@@ -133,14 +118,8 @@ int main()
         switch (comando)
         {
         case 1:                             // GREEN
-            piscar_leds(comando);
-            printf("ON: %s\n", entrada);
         case 2:                             // BLUE
-            piscar_leds(comando);
-            printf("ON: %s\n", entrada);
         case 3:                             // RED
-            piscar_leds(comando);
-            printf("ON: %s\n", entrada);
         case 4:                             // WHITE
             piscar_leds(comando);           // Controla os LEDs
             printf("ON: %s\n", entrada);
