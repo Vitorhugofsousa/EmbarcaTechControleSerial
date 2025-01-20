@@ -121,7 +121,7 @@ int main()
 
     char entrada[20];
 
-    printf("Digite um comando (GREEN, BLUE, RED, WHITE, BUZZER, OFF): \n");
+    printf("Digite um comando (GREEN, BLUE, RED, WHITE, BUZZER, OFF, BOOTSEL): \n");
 
     while (1)
     {
