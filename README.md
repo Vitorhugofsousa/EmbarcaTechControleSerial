@@ -21,9 +21,6 @@ No link a seguir há um vídeo contendo a explicação das funções no código 
 
 https://youtu.be/ThnQFzLejZ0<br>
 
-E no link a seguir há um vídeo com o programa rodando em uma BitDogLab:<br><br>
-
-https://youtube.com/shorts/Xn0ROKww6-I
 
 # Contribuições
 
